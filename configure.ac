@@ -242,6 +242,18 @@ GOBJECT_INTROSPECTION_CHECK([0.10.8])
 VAPIGEN_CHECK([0.17.1.26],,,[no])
 
 dnl ===========================================================================
+minigui_backend="yes"
+AC_ARG_ENABLE(minigui-backend,
+[  --enable-minigui-backend        enable MiniGUI Backend<default=yes>],
+minigui_backend=$enableval)
+
+
+if test "x$minigui_backend" = "xyes"; then
+    AC_DEFINE(HAVE_MINIGUI_BACKEND, 1,
+            [Define if enable MiniGUI Backend])
+fi
+
+dnl ===========================================================================
 
 m4_copy([AC_DEFUN],[glib_DEFUN])
 glib_DEFUN([GLIB_LC_MESSAGES],
