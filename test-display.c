@@ -17,6 +17,7 @@
  * Simple utility to view a SVG file inside of a GtkWindow
  */
 
+#ifndef HAVE_MINIGUI_BACKEND
 #include "config.h"
 #include "rsvg-private.h"
 #include "rsvg-size-callback.h"
@@ -788,3 +789,5 @@ main (int argc, char **argv)
 
     return retval;
 }
+
+#endif

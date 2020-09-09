@@ -929,6 +929,7 @@ rsvg_cairo_get_surface_of_node (RsvgDrawingCtx *ctx,
     return surface;
 }
 
+#ifndef HAVE_MINIGUI_BACKEND 
 cairo_surface_t *
 rsvg_cairo_surface_from_pixbuf (const GdkPixbuf *pixbuf)
 {
@@ -1019,6 +1020,7 @@ rsvg_cairo_surface_from_pixbuf (const GdkPixbuf *pixbuf)
     cairo_surface_mark_dirty (surface);
     return surface;
 }
+#endif
 
 /* Copied from gtk+/gdk/gdkpixbuf-drawable.c, LGPL 2+.
  *
@@ -1094,6 +1096,7 @@ convert_no_alpha (guchar *dest_data,
     }
 }
 
+#ifndef HAVE_MINIGUI_BACKEND 
 GdkPixbuf *
 rsvg_cairo_surface_to_pixbuf (cairo_surface_t *surface)
 {
@@ -1132,6 +1135,7 @@ rsvg_cairo_surface_to_pixbuf (cairo_surface_t *surface)
 
     return dest;
 }
+#endif
 
 /* This is unused but still exists for ABI compat. See bug #666868. */
 void rsvg_cairo_to_pixbuf (guint8 * pixels, int rowstride, int height);

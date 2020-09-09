@@ -345,11 +345,14 @@ guint                rsvg_property_bag_size	     (RsvgPropertyBag * bag);
 G_GNUC_INTERNAL
 void                 rsvg_property_bag_enumerate (RsvgPropertyBag * bag, RsvgPropertyBagEnumFunc func,
                                                   gpointer user_data);
+#ifndef HAVE_MINIGUI_BACKEND
 /* for some reason this one's public... */
 GdkPixbuf *rsvg_pixbuf_from_data_with_size_data (const guchar * buff,
                                                  size_t len,
                                                  gpointer data,
                                                  const char *base_uri, GError ** error);
+#endif
+
 G_GNUC_INTERNAL
 gboolean     rsvg_eval_switch_attributes	(RsvgPropertyBag * atts, gboolean * p_has_cond);
 G_GNUC_INTERNAL
@@ -371,10 +374,12 @@ G_GNUC_INTERNAL
 void rsvg_render_free           (RsvgRender * render);
 G_GNUC_INTERNAL
 void rsvg_add_clipping_rect     (RsvgDrawingCtx * ctx, double x, double y, double w, double h);
+#ifndef HAVE_MINIGUI_BACKEND
 G_GNUC_INTERNAL
 cairo_surface_t *rsvg_cairo_surface_from_pixbuf (const GdkPixbuf *pixbuf);
 G_GNUC_INTERNAL
 GdkPixbuf *rsvg_cairo_surface_to_pixbuf (cairo_surface_t *surface);
+#endif
 G_GNUC_INTERNAL
 cairo_surface_t *rsvg_get_surface_of_node (RsvgDrawingCtx * ctx, RsvgNode * drawable, double w, double h);
 G_GNUC_INTERNAL

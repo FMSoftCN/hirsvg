@@ -41,6 +41,9 @@ rsvg_cairo_surface_new_from_href (RsvgHandle *handle,
                                   const char *href,
                                   GError **error)
 {
+#ifdef HAVE_MINIGUI_BACKEND 
+    return NULL;
+#else
     char *data;
     gsize data_len;
     char *mime_type = NULL;
@@ -110,6 +113,7 @@ rsvg_cairo_surface_new_from_href (RsvgHandle *handle,
     g_free (data);
 
     return surface;
+#endif
 }
 
 void

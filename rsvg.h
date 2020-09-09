@@ -31,7 +31,9 @@
 #include <glib-object.h>
 #include <gio/gio.h>
 
+#ifndef HAVE_MINIGUI_BACKEND 
 #include <gdk-pixbuf/gdk-pixbuf.h>
+#endif
 
 G_BEGIN_DECLS
 
@@ -137,8 +139,11 @@ RsvgHandle  *rsvg_handle_new		(void);
 gboolean     rsvg_handle_write		(RsvgHandle * handle, const guchar * buf, 
                                      gsize count, GError ** error);
 gboolean     rsvg_handle_close		(RsvgHandle * handle, GError ** error);
+
+#ifndef HAVE_MINIGUI_BACKEND 
 GdkPixbuf   *rsvg_handle_get_pixbuf	(RsvgHandle * handle);
 GdkPixbuf   *rsvg_handle_get_pixbuf_sub (RsvgHandle * handle, const char *id);
+#endif
 
 const char  *rsvg_handle_get_base_uri (RsvgHandle * handle);
 void         rsvg_handle_set_base_uri (RsvgHandle * handle, const char *base_uri);
@@ -224,6 +229,7 @@ void rsvg_handle_set_size_callback (RsvgHandle * handle,
                                     RsvgSizeFunc size_func,
                                     gpointer user_data, GDestroyNotify user_data_destroy);
 
+#ifndef HAVE_MINIGUI_BACKEND 
 /* GdkPixbuf convenience API */
 
 RSVG_DEPRECATED
@@ -242,6 +248,7 @@ GdkPixbuf *rsvg_pixbuf_from_file_at_zoom_with_max (const gchar * file_name,
                                                    double x_zoom,
                                                    double y_zoom,
                                                    gint max_width, gint max_height, GError ** error);
+#endif
 
 RSVG_DEPRECATED
 const char *rsvg_handle_get_title       (RsvgHandle * handle);

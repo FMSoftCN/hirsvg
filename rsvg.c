@@ -61,6 +61,7 @@
  *
  * Since: 2.14
  **/
+#ifndef HAVE_MINIGUI_BACKEND 
 GdkPixbuf *
 rsvg_handle_get_pixbuf_sub (RsvgHandle * handle, const char *id)
 {
@@ -118,3 +119,4 @@ rsvg_handle_get_pixbuf (RsvgHandle * handle)
 {
     return rsvg_handle_get_pixbuf_sub (handle, NULL);
 }
+#endif

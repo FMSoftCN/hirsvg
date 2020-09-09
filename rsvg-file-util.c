@@ -45,6 +45,7 @@
 
 #define SVG_BUFFER_SIZE (1024 * 8)
 
+#ifndef HAVE_MINIGUI_BACKEND 
 /* private */
 GdkPixbuf *
 rsvg_pixbuf_from_data_with_size_data (const guchar * buff,
@@ -290,3 +291,4 @@ rsvg_pixbuf_from_file_at_max_size (const gchar * file_name,
 
     return rsvg_pixbuf_from_file_with_size_data (file_name, &data, error);
 }
+#endif
