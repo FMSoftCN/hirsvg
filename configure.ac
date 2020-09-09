@@ -130,7 +130,7 @@ AC_CHECK_FUNCS(strtok_r)
 # GTK
 # ===========================================================================
 
-PKG_CHECK_MODULES([GTK3],[gtk+-3.0 >= $GTK3_REQUIRED],[have_gtk_3=yes],[have_gtk_3=no])
+#PKG_CHECK_MODULES([GTK3],[gtk+-3.0 >= $GTK3_REQUIRED],[have_gtk_3=yes],[have_gtk_3=no])
 
 GTK3_BINARY_VERSION=
 
