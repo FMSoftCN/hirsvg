@@ -31,6 +31,10 @@
 #include <glib-object.h>
 #include <gio/gio.h>
 
+#ifndef HAVE_MINIGUI_BACKEND
+#define HAVE_MINIGUI_BACKEND
+#endif
+
 #ifndef HAVE_MINIGUI_BACKEND 
 #include <gdk-pixbuf/gdk-pixbuf.h>
 #endif
