@@ -46,6 +46,9 @@ struct _RsvgStylePair {
     gboolean important;
 };
 
+gboolean    rsvg_handle_render_cairo_style (RsvgHandle * handle, cairo_t * cr,
+                const RsvgStylePair* style_pairs, size_t nr_pairs);
+
 gboolean    rsvg_handle_render_cairo_sub_style (RsvgHandle * handle, cairo_t * cr,
                 const char* id, const RsvgStylePair* style_pairs, size_t nr_pairs);
 

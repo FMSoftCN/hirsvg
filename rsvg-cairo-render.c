@@ -186,11 +186,11 @@ rsvg_cairo_new_drawing_ctx (cairo_t * cr, RsvgHandle * handle)
  * @style_pairs: The style property pairs.
  * @nr_pairs: The number of pairs in @style_pairs.
  *
- * Draws a subset of a SVG to a Cairo surface
+ * Draws a subset of a SVG to a Cairo surface with overridden style
  *
  * Returns: %TRUE if drawing succeeded.
  *
- * Since: 2.14
+ * Since: minigui-backend
  */
 gboolean
 rsvg_handle_render_cairo_sub_style (RsvgHandle * handle, cairo_t * cr,
@@ -246,6 +246,24 @@ rsvg_handle_render_cairo_sub_style (RsvgHandle * handle, cairo_t * cr,
 }
 
 /**
+ * rsvg_handle_render_cairo_style:
+ * @handle: A #RsvgHandle
+ * @cr: A Cairo renderer
+ * @style_pairs: The style property pairs.
+ * @nr_pairs: The number of pairs in @style_pairs.
+ *
+ * Draws a SVG to a Cairo surface with overridden style
+ *
+ * Returns: %TRUE if drawing succeeded.
+ * Since: minigui-backend
+ */
+gboolean
+rsvg_handle_render_cairo_style (RsvgHandle * handle, cairo_t * cr,
+        const RsvgStylePair* style_pairs, size_t nr_pairs)
+{
+    return rsvg_handle_render_cairo_sub_style (handle, cr, NULL, style_pairs, nr_pairs);
+}
+/**
  * rsvg_handle_render_cairo_sub:
  * @handle: A #RsvgHandle
  * @cr: A Cairo renderer
@@ -280,3 +298,4 @@ rsvg_handle_render_cairo (RsvgHandle * handle, cairo_t * cr)
 {
     return rsvg_handle_render_cairo_sub_style (handle, cr, NULL, NULL, 0);
 }
+
