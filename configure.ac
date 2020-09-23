@@ -130,8 +130,8 @@ AC_CHECK_FUNCS(strtok_r)
 # GTK
 # ===========================================================================
 
-#PKG_CHECK_MODULES([GTK3],[gtk+-3.0 >= $GTK3_REQUIRED],[have_gtk_3=yes],[have_gtk_3=no])
-
+dnl PKG_CHECK_MODULES([GTK3],[gtk+-3.0 >= $GTK3_REQUIRED],[have_gtk_3=yes],[have_gtk_3=no])
+have_gtk_3="no"
 GTK3_BINARY_VERSION=
 
 if test "$have_gtk_3" = "yes"; then
@@ -236,21 +236,26 @@ if test -z "$enable_introspection"; then
   enable_introspection=yes
 fi
 
-GOBJECT_INTROSPECTION_CHECK([0.10.8])
+dnl GOBJECT_INTROSPECTION_CHECK([0.10.8])
+found_introspection="no"
+AM_CONDITIONAL([HAVE_INTROSPECTION], test "x$found_introspection" = "xyes")
 
 # Vala bindings
 VAPIGEN_CHECK([0.17.1.26],,,[no])
 
 dnl ===========================================================================
-minigui_backend="yes"
 AC_ARG_ENABLE(minigui-backend,
-[  --enable-minigui-backend        enable MiniGUI Backend<default=yes>],
-minigui_backend=$enableval)
+              AC_HELP_STRING([--enable-minigui-backend],
+                             [build support for MiniGUI [default=auto]]),
+              [minigui_backend=$enableval],
+              [minigui_backend=auto])
 
+if test "x$minigui_backend" = "xauto"; then
+    PKG_CHECK_MODULES([MINIGUI], [minigui >= 4.0.4], [minigui_backend=yes], [minigui_backend=no])
+fi
 
 if test "x$minigui_backend" = "xyes"; then
-    AC_DEFINE(HAVE_MINIGUI_BACKEND, 1,
-            [Define if enable MiniGUI Backend])
+    AC_DEFINE(HAVE_MINIGUI_BACKEND, 1, [Define if enable MiniGUI Backend])
 fi
 
 dnl ===========================================================================
@@ -304,12 +309,13 @@ dnl ============================================================================
 echo "
 librsvg-$VERSION
 
-	prefix:                         ${prefix}
-	compiler:                       ${CC}
-	
-	Build introspectable bindings:  ${found_introspection}
-	Build Vala bindings:            ${enable_vala}
-	Build GdkPixbuf loader:         ${enable_pixbuf_loader}
-        GTK+ $GTK3_REQUIRED or later:           ${have_gtk_3}
-	Build miscellaneous tools:      ${build_misc_tools}
+    prefix:                         ${prefix}
+    compiler:                       ${CC}
+    
+    Build introspectable bindings:  ${found_introspection}
+    Build Vala bindings:            ${enable_vala}
+    Build support for MiniGUI:      ${minigui_backend}
+    Build GdkPixbuf loader:         ${enable_pixbuf_loader}
+    GTK+ $GTK3_REQUIRED or later:   ${have_gtk_3}
+    Build miscellaneous tools:      ${build_misc_tools}
 "
