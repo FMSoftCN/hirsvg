@@ -37,6 +37,18 @@ G_BEGIN_DECLS
 gboolean    rsvg_handle_render_cairo     (RsvgHandle * handle, cairo_t * cr);
 gboolean    rsvg_handle_render_cairo_sub (RsvgHandle * handle, cairo_t * cr, const char *id);
 
+/* VW: pass style pairs to override the default style properties */
+
+typedef struct _RsvgStylePair RsvgStylePair;
+struct _RsvgStylePair {
+    const gchar* name;
+    const gchar* value;
+    gboolean important;
+};
+
+gboolean    rsvg_handle_render_cairo_sub_style (RsvgHandle * handle, cairo_t * cr,
+                const char* id, const RsvgStylePair* style_pairs, size_t nr_pairs);
+
 G_END_DECLS
 
 #endif

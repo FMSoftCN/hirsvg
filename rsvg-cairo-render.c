@@ -177,12 +177,14 @@ rsvg_cairo_new_drawing_ctx (cairo_t * cr, RsvgHandle * handle)
 }
 
 /**
- * rsvg_handle_render_cairo_sub:
+ * rsvg_handle_render_cairo_sub_style:
  * @handle: A #RsvgHandle
  * @cr: A Cairo renderer
  * @id: (nullable): An element's id within the SVG, or %NULL to render
  *   the whole SVG. For example, if you have a layer called "layer1"
  *   that you wish to render, pass "##layer1" as the id.
+ * @style_pairs: The style property pairs.
+ * @nr_pairs: The number of pairs in @style_pairs.
  *
  * Draws a subset of a SVG to a Cairo surface
  *
@@ -191,7 +193,8 @@ rsvg_cairo_new_drawing_ctx (cairo_t * cr, RsvgHandle * handle)
  * Since: 2.14
  */
 gboolean
-rsvg_handle_render_cairo_sub (RsvgHandle * handle, cairo_t * cr, const char *id)
+rsvg_handle_render_cairo_sub_style (RsvgHandle * handle, cairo_t * cr,
+        const char *id, const RsvgStylePair* style_pairs, size_t nr_pairs)
 {
     RsvgDrawingCtx *draw;
     RsvgNode *drawsub = NULL;
@@ -213,6 +216,18 @@ rsvg_handle_render_cairo_sub (RsvgHandle * handle, cairo_t * cr, const char *id)
     if (!draw)
         return FALSE;
 
+    if (style_pairs && nr_pairs > 0) {
+        RsvgState * state = rsvg_current_state (draw);
+        gint i;
+
+        for (i = 0; i < nr_pairs; i++) {
+            if (style_pairs[i].name && style_pairs[i].value) {
+                rsvg_parse_style_pair (handle, state,
+                        style_pairs[i].name, style_pairs[i].value, style_pairs[i].important);
+            }
+        }
+    }
+
     while (drawsub != NULL) {
         draw->drawsub_stack = g_slist_prepend (draw->drawsub_stack, drawsub);
         drawsub = drawsub->parent;
@@ -231,6 +246,26 @@ rsvg_handle_render_cairo_sub (RsvgHandle * handle, cairo_t * cr, const char *id)
 }
 
 /**
+ * rsvg_handle_render_cairo_sub:
+ * @handle: A #RsvgHandle
+ * @cr: A Cairo renderer
+ * @id: (nullable): An element's id within the SVG, or %NULL to render
+ *   the whole SVG. For example, if you have a layer called "layer1"
+ *   that you wish to render, pass "##layer1" as the id.
+ *
+ * Draws a subset of a SVG to a Cairo surface
+ *
+ * Returns: %TRUE if drawing succeeded.
+ *
+ * Since: 2.14
+ */
+gboolean
+rsvg_handle_render_cairo_sub (RsvgHandle * handle, cairo_t * cr, const char *id)
+{
+    return rsvg_handle_render_cairo_sub_style (handle, cr, id, NULL, 0);
+}
+
+/**
  * rsvg_handle_render_cairo:
  * @handle: A #RsvgHandle
  * @cr: A Cairo renderer
@@ -243,5 +278,5 @@ rsvg_handle_render_cairo_sub (RsvgHandle * handle, cairo_t * cr, const char *id)
 gboolean
 rsvg_handle_render_cairo (RsvgHandle * handle, cairo_t * cr)
 {
-    return rsvg_handle_render_cairo_sub (handle, cr, NULL);
+    return rsvg_handle_render_cairo_sub_style (handle, cr, NULL, NULL, 0);
 }
