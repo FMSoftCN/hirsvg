@@ -54,3 +54,5 @@ dist_installed_test_data =				\
 	fixtures/styles/bug614643.svg			\
 	fixtures/styles/bug418823.svg			\
 	fixtures/styles/order.svg
+
+#noinst_PROGRAMS = $(test_programs)
