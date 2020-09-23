@@ -486,7 +486,7 @@ rsvg_state_finalize (RsvgState * state)
 }
 
 /* Parse a CSS2 style argument, setting the SVG context attributes. */
-static void
+void
 rsvg_parse_style_pair (RsvgHandle * ctx,
                        RsvgState * state,
                        const gchar * name,

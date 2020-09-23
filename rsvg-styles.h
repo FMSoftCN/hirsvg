@@ -209,6 +209,10 @@ void rsvg_state_finalize    (RsvgState * state);
 G_GNUC_INTERNAL
 void rsvg_state_free_all    (RsvgState * state);
 
+/* VW: to override the author style */
+G_GNUC_INTERNAL
+void rsvg_parse_style_pair (RsvgHandle * ctx, RsvgState * state,
+                       const gchar * name, const gchar * value, gboolean important);
 G_GNUC_INTERNAL
 void rsvg_parse_style_pairs (RsvgHandle * ctx, RsvgState * state, RsvgPropertyBag * atts);
 G_GNUC_INTERNAL
