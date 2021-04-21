@@ -34,7 +34,7 @@ dnl ===========================================================================
 GLIB_REQUIRED=2.12.0
 GIO_REQUIRED=2.24.0
 LIBXML_REQUIRED=2.7.0
-CAIRO_REQUIRED=1.2.0
+HICAIRO_REQUIRED=1.2.0
 PANGOCAIRO_REQUIRED=1.32.6
 GDK_PIXBUF_REQUIRED=2.20
 GTK3_REQUIRED=3.10.0
@@ -103,8 +103,8 @@ PKG_CHECK_MODULES(LIBRSVG, \
 	gio-2.0 >= $GIO_REQUIRED \
 	libxml-2.0 >= $LIBXML_REQUIRED \
 	pangocairo >= $PANGOCAIRO_REQUIRED \
-	cairo >= $CAIRO_REQUIRED \
-	cairo-png >= $CAIRO_REQUIRED
+	hicairo >= $HICAIRO_REQUIRED \
+	cairo-png >= $HICAIRO_REQUIRED
         libcroco-0.6 >= $CROCO_REQUIRED)
 
 PKG_CHECK_MODULES([GTHREAD],[gthread-2.0 >= $GLIB_REQUIRED])
