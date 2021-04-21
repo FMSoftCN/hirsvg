@@ -9,6 +9,6 @@ css_supported=true
 Name: libhirsvg
 Description: library that renders svg files
 Version: @VERSION@
-Requires: glib-2.0 gio-2.0 gdk-pixbuf-2.0 cairo
+Requires: glib-2.0 gio-2.0 gdk-pixbuf-2.0 hicairo
 Libs: ${pc_top_builddir}/${pcfiledir}/libhirsvg-@RSVG_API_MAJOR_VERSION@.la
 Cflags: -I${pc_top_builddir}/${pcfiledir}

@@ -103,7 +103,7 @@ PKG_CHECK_MODULES(LIBRSVG, \
 	gio-2.0 >= $GIO_REQUIRED \
 	libxml-2.0 >= $LIBXML_REQUIRED \
 	pangocairo >= $PANGOCAIRO_REQUIRED \
-	cairo >= $CAIRO_REQUIRED \
+	hicairo >= $CAIRO_REQUIRED \
 	cairo-png >= $CAIRO_REQUIRED
         libcroco-0.6 >= $CROCO_REQUIRED)
 
@@ -113,10 +113,10 @@ PKG_CHECK_MODULES([GMODULE],[gmodule-2.0])
 
 case "$host" in
   *-*-mingw*)
-    PKG_CHECK_MODULES([RSVG_CONVERT],[gio-2.0 gio-windows-2.0 gdk-pixbuf-2.0 cairo pangocairo])
+    PKG_CHECK_MODULES([RSVG_CONVERT],[gio-2.0 gio-windows-2.0 gdk-pixbuf-2.0 hicairo pangocairo])
     ;;
   *)
-    PKG_CHECK_MODULES([RSVG_CONVERT],[gio-2.0 gio-unix-2.0 gdk-pixbuf-2.0 cairo pangocairo])
+    PKG_CHECK_MODULES([RSVG_CONVERT],[gio-2.0 gio-unix-2.0 gdk-pixbuf-2.0 hicairo pangocairo])
     ;;
 esac
 
@@ -209,7 +209,7 @@ GTK_DOC_CHECK([1.13],[--flavour no-tmpl])
 AC_SUBST([GLIB_PREFIX],[$($PKG_CONFIG --variable=prefix glib-2.0)])
 AC_SUBST([GDK_PIXBUF_PREFIX],[$($PKG_CONFIG --variable=prefix gdk-pixbuf-2.0)])
 AC_SUBST([GTK_PREFIX],[$($PKG_CONFIG --variable=prefix gdk-pixbuf-2.0)])
-AC_SUBST([CAIRO_PREFIX],[$($PKG_CONFIG --variable=prefix cairo)])
+AC_SUBST([CAIRO_PREFIX],[$($PKG_CONFIG --variable=prefix hicairo)])
 
 dnl ===========================================================================
 dnl Do we build the miscellaneous tools provided with librsvg ?
