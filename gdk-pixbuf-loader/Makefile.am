@@ -22,7 +22,7 @@ libpixbufloader_svg_la_CFLAGS = \
 libpixbufloader_svg_la_LDFLAGS = -avoid-version -module $(AM_LDFLAGS)
 
 libpixbufloader_svg_la_LIBADD = \
-	$(top_builddir)/librsvg-@RSVG_API_MAJOR_VERSION@.la	\
+	$(top_builddir)/libhirsvg-@RSVG_API_MAJOR_VERSION@.la	\
 	$(GDK_PIXBUF_LIBS)	\
 	$(LIBRSVG_LIBS)
 

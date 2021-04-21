@@ -3,7 +3,7 @@ SUBDIRS = . gdk-pixbuf-loader tests tools doc build
 NULL =
 BUILT_SOURCES =
 
-lib_LTLIBRARIES = librsvg-@RSVG_API_MAJOR_VERSION@.la
+lib_LTLIBRARIES = libhirsvg-@RSVG_API_MAJOR_VERSION@.la
 
 bin_PROGRAMS = rsvg-convert
 if HAVE_GTK_3
@@ -19,7 +19,7 @@ enum_sources = \
 	librsvg-enum-types.c
 BUILT_SOURCES += $(enum_sources)
 
-librsvg_@RSVG_API_MAJOR_VERSION@_la_SOURCES = \
+libhirsvg_@RSVG_API_MAJOR_VERSION@_la_SOURCES = \
 	librsvg-features.c 	\
 	rsvg-css.c 		\
 	rsvg-css.h 		\
@@ -72,7 +72,7 @@ librsvg_@RSVG_API_MAJOR_VERSION@_la_SOURCES = \
 	librsvg-enum-types.h	\
 	$(NULL)
 
-librsvg_@RSVG_API_MAJOR_VERSION@_la_CPPFLAGS = \
+libhirsvg_@RSVG_API_MAJOR_VERSION@_la_CPPFLAGS = \
 	-I$(top_srcdir) 			\
 	-I$(top_builddir) 			\
 	-DG_LOG_DOMAIN=\"librsvg\" 		\
@@ -80,12 +80,12 @@ librsvg_@RSVG_API_MAJOR_VERSION@_la_CPPFLAGS = \
 	-DRSVG_DISABLE_DEPRECATION_WARNINGS	\
 	$(AM_CPPFLAGS)
 
-librsvg_@RSVG_API_MAJOR_VERSION@_la_CFLAGS = \
+libhirsvg_@RSVG_API_MAJOR_VERSION@_la_CFLAGS = \
 	-DRSVG_COMPILATION	\
 	$(LIBRSVG_CFLAGS) 	\
 	$(AM_CFLAGS)
 
-librsvg_@RSVG_API_MAJOR_VERSION@_la_LDFLAGS = \
+libhirsvg_@RSVG_API_MAJOR_VERSION@_la_LDFLAGS = \
 	$(BSYMBOLIC_LDFLAG) \
 	-version-info @RSVG_LT_VERSION_INFO@ \
 	-export-dynamic \
@@ -93,12 +93,12 @@ librsvg_@RSVG_API_MAJOR_VERSION@_la_LDFLAGS = \
 	-export-symbols-regex "^rsvg_.*" \
 	$(AM_LDFLAGS)
 
-librsvg_@RSVG_API_MAJOR_VERSION@_la_LIBADD = \
+libhirsvg_@RSVG_API_MAJOR_VERSION@_la_LIBADD = \
 	$(LIBRSVG_LIBS) 	\
 	$(LIBM)
 
-librsvgincdir = $(includedir)/librsvg-$(RSVG_API_VERSION)/librsvg
-librsvginc_HEADERS = 	\
+libhirsvgincdir = $(includedir)/libhirsvg-$(RSVG_API_VERSION)/libhirsvg
+libhirsvginc_HEADERS = 	\
 	$(headers)	\
 	librsvg-features.h \
 	librsvg-enum-types.h
@@ -124,7 +124,7 @@ rsvg_convert_CFLAGS =\
 rsvg_convert_LDFLAGS = $(AM_LDFLAGS)
 
 rsvg_convert_LDADD = \
-	$(top_builddir)/librsvg-@RSVG_API_MAJOR_VERSION@.la	\
+	$(top_builddir)/libhirsvg-@RSVG_API_MAJOR_VERSION@.la	\
 	$(RSVG_CONVERT_LIBS) \
 	$(LIBM)
 
@@ -146,7 +146,7 @@ rsvg_view_3_CFLAGS =\
 rsvg_view_3_LDFLAGS =
 
 rsvg_view_3_LDADD = \
-	$(top_builddir)/librsvg-@RSVG_API_MAJOR_VERSION@.la \
+	$(top_builddir)/libhirsvg-@RSVG_API_MAJOR_VERSION@.la \
 	$(GTK3_LIBS)		\
 	$(LIBRSVG_LIBS)		\
 	$(GTHREAD_LIBS)		\
@@ -181,7 +181,7 @@ CLEANFILES = \
 ## `install-exec', not `install-data'.
 
 pkgconfigdir = $(libdir)/pkgconfig
-pkgconfig_DATA = librsvg-$(RSVG_API_VERSION).pc
+pkgconfig_DATA = libhirsvg-$(RSVG_API_VERSION).pc
 
 librsvg-enum-types.h: s-enum-types-h
 	@true
@@ -218,16 +218,16 @@ if HAVE_INTROSPECTION
 -include $(INTROSPECTION_MAKEFILE)
 
 INTROSPECTION_GIRS = Rsvg-@RSVG_API_VERSION@.gir
-INTROSPECTION_SCANNER_ARGS = --add-include-path=$(srcdir) --symbol-prefix=rsvg --symbol-prefix=librsvg
+INTROSPECTION_SCANNER_ARGS = --add-include-path=$(srcdir) --symbol-prefix=rsvg --symbol-prefix=libhirsvg
 INTROSPECTION_COMPILER_ARGS = --includedir=$(srcdir)
 
-Rsvg-@RSVG_API_VERSION@.gir: librsvg-@RSVG_API_MAJOR_VERSION@.la
+Rsvg-@RSVG_API_VERSION@.gir: libhirsvg-@RSVG_API_MAJOR_VERSION@.la
 
 Rsvg_@RSVG_API_VERSION_U@_gir_NAMESPACE = Rsvg
-Rsvg_@RSVG_API_VERSION_U@_gir_EXPORT_PACKAGES = librsvg-$(RSVG_API_VERSION)
+Rsvg_@RSVG_API_VERSION_U@_gir_EXPORT_PACKAGES = libhirsvg-$(RSVG_API_VERSION)
 Rsvg_@RSVG_API_VERSION_U@_gir_FILES = \
-	$(librsvginc_HEADERS) \
-	$(filter-out %.h,$(librsvg_@RSVG_API_MAJOR_VERSION@_la_SOURCES)) \
+	$(libhirsvginc_HEADERS) \
+	$(filter-out %.h,$(libhirsvg_@RSVG_API_MAJOR_VERSION@_la_SOURCES)) \
 	$(NULL)
 Rsvg_@RSVG_API_VERSION_U@_gir_INCLUDES = \
 	GLib-2.0 \
@@ -241,7 +241,7 @@ Rsvg_@RSVG_API_VERSION_U@_gir_PACKAGES = \
 	libxml-2.0 \
 	$(NULL)
 Rsvg_@RSVG_API_VERSION_U@_gir_CFLAGS = -I$(top_builddir) -DRSVG_COMPILATION
-Rsvg_@RSVG_API_VERSION_U@_gir_LIBS = librsvg-@RSVG_API_MAJOR_VERSION@.la
+Rsvg_@RSVG_API_VERSION_U@_gir_LIBS = libhirsvg-@RSVG_API_MAJOR_VERSION@.la
 Rsvg_@RSVG_API_VERSION_U@_gir_SCANNERFLAGS = --c-include="librsvg/rsvg.h"
 
 girdir = $(datadir)/gir-1.0
@@ -255,13 +255,13 @@ CLEANFILES += $(nodist_gir_DATA) $(nodist_typelibs_DATA)
 if ENABLE_VAPIGEN
 include $(VAPIGEN_MAKEFILE)
 
-librsvg-$(RSVG_API_VERSION).vapi: Rsvg-$(RSVG_API_VERSION).gir
+libhirsvg-$(RSVG_API_VERSION).vapi: Rsvg-$(RSVG_API_VERSION).gir
 
-VAPIGEN_VAPIS = librsvg-$(RSVG_API_VERSION).vapi
+VAPIGEN_VAPIS = libhirsvg-$(RSVG_API_VERSION).vapi
 
-librsvg_@RSVG_API_VERSION_U@_vapi_DEPS = gio-2.0 cairo
-librsvg_@RSVG_API_VERSION_U@_vapi_METADATADIRS = $(srcdir)
-librsvg_@RSVG_API_VERSION_U@_vapi_FILES = Rsvg-$(RSVG_API_VERSION).gir Rsvg-$(RSVG_API_VERSION)-custom.vala
+libhirsvg_@RSVG_API_VERSION_U@_vapi_DEPS = gio-2.0 cairo
+libhirsvg_@RSVG_API_VERSION_U@_vapi_METADATADIRS = $(srcdir)
+libhirsvg_@RSVG_API_VERSION_U@_vapi_FILES = Rsvg-$(RSVG_API_VERSION).gir Rsvg-$(RSVG_API_VERSION)-custom.vala
 
 vapidir = $(datadir)/vala/vapi
 vapi_DATA = $(VAPIGEN_VAPIS)
@@ -276,10 +276,10 @@ endif # HAVE_INTROSPECTION
 
 MSVCPROJS = rsvg rsvg-convert
 
-rsvg_FILES = $(librsvg_@RSVG_API_MAJOR_VERSION@_la_SOURCES)
+rsvg_FILES = $(libhirsvg_@RSVG_API_MAJOR_VERSION@_la_SOURCES)
 rsvg_EXCLUDES = dummy
-rsvg_HEADERS_DIR = $(librsvgincdir)
-rsvg_HEADERS_INST = $(librsvginc_HEADERS)
+rsvg_HEADERS_DIR = $(libhirsvgincdir)
+rsvg_HEADERS_INST = $(libhirsvginc_HEADERS)
 
 rsvg_HEADERS_EXCLUDES = dummy
 

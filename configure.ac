@@ -5,7 +5,7 @@ m4_define([rsvg_extra_version],[])
 m4_define([rsvg_version],[rsvg_major_version.rsvg_minor_version.rsvg_micro_version()rsvg_extra_version])
 m4_define([rsvg_lt_version_info],m4_eval(rsvg_major_version + rsvg_minor_version):rsvg_micro_version:rsvg_minor_version)
 
-AC_INIT([RSVG],[rsvg_version],[https://bugzilla.gnome.org/enter_bug.cgi?product=librsvg],[librsvg])
+AC_INIT([HIRSVG],[rsvg_version])
 
 AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_SRCDIR([rsvg.h])
@@ -300,8 +300,8 @@ build/win32/vs12/Makefile
 build/win32/vs14/Makefile
 ])
 
-AC_CONFIG_FILES([librsvg-${RSVG_API_VERSION}.pc:librsvg.pc.in],[],[RSVG_API_VERSION=$RSVG_API_VERSION])
-AC_CONFIG_FILES([librsvg-${RSVG_API_VERSION}-uninstalled.pc:librsvg-uninstalled.pc.in],[],[RSVG_API_VERSION=$RSVG_API_VERSION])
+AC_CONFIG_FILES([libhirsvg-${RSVG_API_VERSION}.pc:libhirsvg.pc.in],[],[RSVG_API_VERSION=$RSVG_API_VERSION])
+AC_CONFIG_FILES([libhirsvg-${RSVG_API_VERSION}-uninstalled.pc:libhirsvg-uninstalled.pc.in],[],[RSVG_API_VERSION=$RSVG_API_VERSION])
 
 AC_OUTPUT
 

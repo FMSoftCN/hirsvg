@@ -4,7 +4,7 @@ noinst_PROGRAMS = 			\
 	test-performance
 
 noinst_LTLIBRARIES = 			\
-	librsvg_tools_main.la
+	libhirsvg_tools_main.la
 endif
 
 INCLUDES =				\
@@ -16,22 +16,22 @@ INCLUDES =				\
 	-DG_LOG_DOMAIN=\"librsvg\" 	\
 	-DLIBRSVG_DATADIR="\"$(datadir)\""
 
-DEPS = $(top_builddir)/librsvg-@RSVG_API_MAJOR_VERSION@.la	\
-	librsvg_tools_main.la
+DEPS = $(top_builddir)/libhirsvg-@RSVG_API_MAJOR_VERSION@.la	\
+	libhirsvg_tools_main.la
 LDADDS =				\
 	$(GLIB_LIBS)			\
 	$(LIBRSVG_LIBS) 		\
-	$(top_builddir)/librsvg-@RSVG_API_MAJOR_VERSION@.la
+	$(top_builddir)/libhirsvg-@RSVG_API_MAJOR_VERSION@.la
 
-librsvg_tools_main_la_SOURCES = 		\
+libhirsvg_tools_main_la_SOURCES = 		\
 	rsvg-tools-main.c		\
 	rsvg-tools-main.h
-librsvg_tools_main_la_LIBADD =
+libhirsvg_tools_main_la_LIBADD =
 
 test_performance_SOURCES = test-performance.c
 test_performance_LDFLAGS =
 test_performance_DEPENDENCIES = $(DEPS)
-test_performance_LDADD = librsvg_tools_main.la $(LDADDS) $(LIBM)
+test_performance_LDADD = libhirsvg_tools_main.la $(LDADDS) $(LIBM)
 
 rsvg_dimensions_SOURCES = rsvg-dimensions.c
 rsvg_dimensions_LDFLAGS =
